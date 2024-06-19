@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className="bg-background flex flex-col min-h-screen">
+          <div className="h-36 relative">
+            <Image
+              fill
+              className="md:hidden object-cover"
+              src={"/images/bg-sidebar-mobile.svg"}
+              alt={"bg-sidebar-mobile"}
+              priority
+            />
+          </div>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
