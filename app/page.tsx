@@ -6,12 +6,17 @@ import { z } from "zod";
 
 import { PersonalInfoForm } from "./ui/PersonalInfoForm";
 import { Wizard } from "react-use-wizard";
-import { useEffect } from "react";
+import { SelectPlanForm } from "./ui/SelectPlanForm";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   email: z.string().email(),
   phone: z.string().min(6),
+  billingYearly: z.boolean(),
+  plan: z.enum(["arcade", "advanced", "pro"], {
+    required_error: "You need to select a plan type.",
+    invalid_type_error: "You need to select a plan type.",
+  }),
 });
 
 const steps = [
@@ -26,16 +31,10 @@ export default function Home() {
       name: "",
       email: "",
       phone: "",
+      billingYearly: false,
+      plan: "arcade",
     },
   });
-
-  useEffect(() => {
-    console.log(form.getValues());
-  }, [form]);
-
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
 
   return (
     <>
@@ -43,7 +42,8 @@ export default function Home() {
         <FormProvider {...form}>
           <Wizard>
             <PersonalInfoForm />
-            <h1>Hola</h1>
+            <SelectPlanForm />
+            <>Hola Mundo</>
           </Wizard>
         </FormProvider>
       </div>

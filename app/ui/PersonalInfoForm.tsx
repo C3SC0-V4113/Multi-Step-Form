@@ -17,7 +17,8 @@ export const PersonalInfoForm = () => {
 
   const onSubmit = () => {
     console.log(form.getValues());
-    form.handleSubmit(form.getValues);
+    // form.setValue("name", form.getValues().name);
+    nextStep();
   };
 
   return (
@@ -25,7 +26,7 @@ export const PersonalInfoForm = () => {
       <h1 className="font-bold text-xl">Personal Information</h1>
       <p>Please provide your name, email address, and phone number.</p>
       <Form {...form}>
-        <form className="space-y-8 mt-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
           <FormField
             control={form.control}
             name="name"
@@ -33,7 +34,11 @@ export const PersonalInfoForm = () => {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Sthephen King" {...field} />
+                  <Input
+                    className="text-secondary-foreground"
+                    placeholder="e.g. Sthephen King"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -48,6 +53,7 @@ export const PersonalInfoForm = () => {
                 <FormControl>
                   <Input
                     type="email"
+                    className="text-secondary-foreground"
                     placeholder="e.g. sthephenking@lorem.com"
                     {...field}
                   />
@@ -63,14 +69,18 @@ export const PersonalInfoForm = () => {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. +1 234 567 890" {...field} />
+                  <Input
+                    placeholder="e.g. +1 234 567 890"
+                    className="text-secondary-foreground"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          <Button type="submit">Next Step</Button>
         </form>
-        <Button onClick={() => onSubmit()}>Next Step</Button>
       </Form>
     </>
   );
