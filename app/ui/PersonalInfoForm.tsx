@@ -79,7 +79,11 @@ export const PersonalInfoForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Next Step</Button>
+          <div className="bottom-0 right-0 left-0 fixed bg-primary w-full justify-end p-4 flex">
+            <Button type="submit" variant={"secondary"}>
+              Next Step
+            </Button>
+          </div>
         </form>
       </Form>
     </>

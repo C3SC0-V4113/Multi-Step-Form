@@ -7,6 +7,7 @@ import { z } from "zod";
 import { PersonalInfoForm } from "./ui/PersonalInfoForm";
 import { Wizard } from "react-use-wizard";
 import { SelectPlanForm } from "./ui/SelectPlanForm";
+import SelectAddons from "./ui/SelectAddons";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -17,6 +18,7 @@ const formSchema = z.object({
     required_error: "You need to select a plan type.",
     invalid_type_error: "You need to select a plan type.",
   }),
+  addons: z.array(z.string()).optional(),
 });
 
 const steps = [
@@ -33,16 +35,18 @@ export default function Home() {
       phone: "",
       billingYearly: false,
       plan: "arcade",
+      addons: [],
     },
   });
 
   return (
     <>
-      <div className="bg-primary m-4 p-4 text-primary-foreground rounded">
+      <div className="bg-primary m-4 p-4 text-primary-foreground rounded mb-20">
         <FormProvider {...form}>
           <Wizard>
             <PersonalInfoForm />
             <SelectPlanForm />
+            <SelectAddons />
             <>Hola Mundo</>
           </Wizard>
         </FormProvider>

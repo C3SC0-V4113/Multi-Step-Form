@@ -10,13 +10,18 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
-import { useEffect } from "react";
+import clsx from "clsx";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 
 export const SelectPlanForm = () => {
   const form = useFormContext();
   const { nextStep, previousStep } = useWizard();
+  const [billingYearly, setBillingYearly] = useState<boolean>(
+    form.getValues().billingYearly
+  );
 
   const onSubmit = () => {
     console.log(form.getValues());
@@ -24,14 +29,13 @@ export const SelectPlanForm = () => {
   };
 
   useEffect(() => {
-    console.log(form.getValues().billingYearly);
-    console.log(form.getValues().plan);
+    setBillingYearly(form.getValues().billingYearly);
   }, [form]);
 
   return (
     <>
-      <h1 className="font-bold text-xl">Personal Information</h1>
-      <p>Please provide your name, email address, and phone number.</p>
+      <h1 className="font-bold text-xl">Select your plan</h1>
+      <p>You have the option of monthly or yearly billing</p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
           <FormField
@@ -49,10 +53,25 @@ export const SelectPlanForm = () => {
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <ToggleGroupItem
-                          className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary"
+                          className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4"
                           value="arcade"
                         >
-                          Arcade
+                          <Image
+                            src={"/icons/icon-arcade.svg"}
+                            alt={"arcade icon"}
+                            className="my-auto"
+                            width={40}
+                            height={40}
+                          />
+                          <div className="flex flex-col my-auto text-left">
+                            <p className="font-bold text-accent">Arcade</p>
+                            <p className="text-muted-foreground">{`$${
+                              billingYearly ? "90/yr" : "9/mo"
+                            }`}</p>
+                            {billingYearly && (
+                              <p className="text-accent">2 months free</p>
+                            )}
+                          </div>
                         </ToggleGroupItem>
                       </FormControl>
                       <FormLabel className="sr-only">Arcade</FormLabel>
@@ -61,9 +80,24 @@ export const SelectPlanForm = () => {
                       <FormControl>
                         <ToggleGroupItem
                           value="advanced"
-                          className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary"
+                          className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4"
                         >
-                          Advanced
+                          <Image
+                            src={"/icons/icon-advanced.svg"}
+                            alt={"advanced icon"}
+                            className="my-auto"
+                            width={40}
+                            height={40}
+                          />
+                          <div className="flex flex-col my-auto text-left">
+                            <p className="font-bold">Advanced</p>
+                            <p className="text-muted-foreground">{`$${
+                              billingYearly ? "120/yr" : "12/mo"
+                            }`}</p>
+                            {billingYearly && (
+                              <p className="text-accent">2 months free</p>
+                            )}
+                          </div>
                         </ToggleGroupItem>
                       </FormControl>
                       <FormLabel className="sr-only">Advanced</FormLabel>
@@ -72,9 +106,24 @@ export const SelectPlanForm = () => {
                       <FormControl>
                         <ToggleGroupItem
                           value="pro"
-                          className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary"
+                          className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4"
                         >
-                          Pro
+                          <Image
+                            src={"/icons/icon-pro.svg"}
+                            alt={"pro icon"}
+                            className="my-auto"
+                            width={40}
+                            height={40}
+                          />
+                          <div className="flex flex-col my-auto text-left">
+                            <p className="font-bold">Pro</p>
+                            <p className="text-muted-foreground">{`$${
+                              billingYearly ? "150/yr" : "15/mo"
+                            }`}</p>
+                            {billingYearly && (
+                              <p className="text-accent">2 months free</p>
+                            )}
+                          </div>
                         </ToggleGroupItem>
                       </FormControl>
                       <FormLabel className="sr-only">Pro</FormLabel>
@@ -89,21 +138,44 @@ export const SelectPlanForm = () => {
             control={form.control}
             name="billingYearly"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                <FormLabel className="text-base">Monthly</FormLabel>
+              <FormItem className="flex flex-row items-center justify-between rounded-lg bg-background text-foreground p-4">
+                <FormLabel
+                  className={clsx("text-base", {
+                    "text-muted-foreground": billingYearly,
+                    "text-accent-foreground": !billingYearly,
+                  })}
+                >
+                  Monthly
+                </FormLabel>
                 <FormControl>
                   <Switch
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormLabel className="text-base">Yearly</FormLabel>
+                <FormLabel
+                  className={clsx("text-base", {
+                    "text-muted-foreground": !billingYearly,
+                    "text-accent-foreground": billingYearly,
+                  })}
+                >
+                  Yearly
+                </FormLabel>
               </FormItem>
             )}
           />
-          <div className="flex justify-between">
-            <Button onClick={previousStep}>Go Back</Button>
-            <Button type="submit">Next Step</Button>
+          <div className="fixed bottom-0 right-0 left-0 bg-primary w-full justify-between p-4 flex">
+            <Button
+              onClick={previousStep}
+              variant={"link"}
+              className="text-muted"
+              disabled={form.formState.errors.plan ? true : false}
+            >
+              Go Back
+            </Button>
+            <Button type="submit" variant={"secondary"}>
+              Next Step
+            </Button>
           </div>
         </form>
       </Form>
