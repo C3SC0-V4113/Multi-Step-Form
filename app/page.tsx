@@ -9,6 +9,7 @@ import { Wizard } from "react-use-wizard";
 import { SelectPlanForm } from "./ui/SelectPlanForm";
 import SelectAddons from "./ui/SelectAddons";
 import { FinishingUp } from "./ui/FinishingUp";
+import { ThankYou } from "./ui/ThankYou";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -51,6 +52,7 @@ export default function Home() {
             <SelectPlanForm />
             <SelectAddons />
             <FinishingUp />
+            <ThankYou />
           </Wizard>
         </FormProvider>
       </div>

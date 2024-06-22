@@ -23,10 +23,10 @@ export const FinishingUp = () => {
   const form = useFormContext<z.infer<typeof formSchema>>();
   const { nextStep, previousStep, goToStep } = useWizard();
 
-  const onSubmit = () => {
-    console.log(form.getValues());
-    nextStep();
-  };
+  //   const onSubmit = () => {
+  //     console.log(form.getValues());
+  //     nextStep();
+  //   };
 
   const { billingYearly, plan, addons } = form.getValues();
 
@@ -85,7 +85,7 @@ export const FinishingUp = () => {
         <Button onClick={previousStep} variant={"link"} className="text-muted">
           Go Back
         </Button>
-        <Button type="submit" variant={"secondary"}>
+        <Button onClick={() => nextStep()} variant={"secondary"}>
           Confirm
         </Button>
       </div>
