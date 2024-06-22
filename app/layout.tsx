@@ -31,7 +31,9 @@ export default function RootLayout({
               priority
             />
           </div>
-          <div className="absolute top-24 left-0 right-0">{children}</div>
+          <div className="absolute top-24 left-0 right-0 md:relative">
+            {children}
+          </div>
         </main>
       </body>
     </html>
