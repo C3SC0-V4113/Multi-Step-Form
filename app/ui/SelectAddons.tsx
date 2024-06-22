@@ -11,6 +11,7 @@ import {
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
+import { StepIndicator } from "./components/StepIndicator";
 
 const items = [
   {
@@ -47,6 +48,7 @@ const SelectAddons = () => {
 
   return (
     <>
+      <StepIndicator />
       <h1 className="font-bold text-xl">Pick add-ons</h1>
       <p>Add-ons help enhance your gaming experience</p>
       <Form {...form}>

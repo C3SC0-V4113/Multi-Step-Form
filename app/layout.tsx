@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={ubuntu.className}>
         <main className="bg-background flex flex-col min-h-screen">
-          <div className="h-36 relative">
+          <div className="h-40 relative">
             <Image
               fill
               className="md:hidden object-cover"
@@ -31,7 +31,7 @@ export default function RootLayout({
               priority
             />
           </div>
-          {children}
+          <div className="absolute top-24 left-0 right-0">{children}</div>
         </main>
       </body>
     </html>

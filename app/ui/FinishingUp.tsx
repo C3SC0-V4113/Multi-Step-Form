@@ -4,6 +4,7 @@ import { Separator } from "@radix-ui/react-separator";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 import { z } from "zod";
+import { StepIndicator } from "./components/StepIndicator";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -38,6 +39,7 @@ export const FinishingUp = () => {
 
   return (
     <>
+      <StepIndicator />
       <h1 className="font-bold text-xl">Finishing Up</h1>
       <p>Double-check everything looks OK before confirming</p>
       <div className="p-4 my-4 w-full flex flex-col bg-background text-foreground rounded">

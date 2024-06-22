@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
+import { StepIndicator } from "./components/StepIndicator";
 
 export const PersonalInfoForm = () => {
   const form = useFormContext();
@@ -23,6 +24,7 @@ export const PersonalInfoForm = () => {
 
   return (
     <>
+      <StepIndicator />
       <h1 className="font-bold text-xl">Personal Information</h1>
       <p>Please provide your name, email address, and phone number.</p>
       <Form {...form}>

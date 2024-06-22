@@ -15,6 +15,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
+import { StepIndicator } from "./components/StepIndicator";
 
 export const SelectPlanForm = () => {
   const form = useFormContext();
@@ -34,6 +35,7 @@ export const SelectPlanForm = () => {
 
   return (
     <>
+      <StepIndicator />
       <h1 className="font-bold text-xl">Select your plan</h1>
       <p>You have the option of monthly or yearly billing</p>
       <Form {...form}>
