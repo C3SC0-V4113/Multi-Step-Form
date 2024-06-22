@@ -47,8 +47,8 @@ const SelectAddons = () => {
 
   return (
     <>
-      <h1 className="font-bold text-xl">Personal Information</h1>
-      <p>Please provide your name, email address, and phone number.</p>
+      <h1 className="font-bold text-xl">Pick add-ons</h1>
+      <p>Add-ons help enhance your gaming experience</p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-4">
           <FormField
@@ -86,14 +86,18 @@ const SelectAddons = () => {
                             }}
                           />
                         </FormControl>
-                        <FormLabel className="font-normal flex">
-                          <div className="flex flex-col gap-2">
+                        <FormLabel className="font-normal flex w-full">
+                          <div className="flex flex-col basis-4/5  gap-2">
                             <p className="font-bold text-accent">
                               {item.label}
                             </p>
                             <p>{item.description}</p>
                           </div>
-                          <p>{`+$${item.monthlyPrice}`}</p>
+                          <p className="basis-1/5 self-center text-center">{`+$${
+                            form.getValues().billingYearly === false
+                              ? item.monthlyPrice + "/mo"
+                              : item.yearlyPrice + "/yr"
+                          }`}</p>
                         </FormLabel>
                         <FormMessage />
                       </FormItem>

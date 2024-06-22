@@ -8,6 +8,7 @@ import { PersonalInfoForm } from "./ui/PersonalInfoForm";
 import { Wizard } from "react-use-wizard";
 import { SelectPlanForm } from "./ui/SelectPlanForm";
 import SelectAddons from "./ui/SelectAddons";
+import { FinishingUp } from "./ui/FinishingUp";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -18,7 +19,9 @@ const formSchema = z.object({
     required_error: "You need to select a plan type.",
     invalid_type_error: "You need to select a plan type.",
   }),
-  addons: z.array(z.string()).optional(),
+  addons: z
+    .array(z.enum(["online-service", "larger-storage", "customizable-profile"]))
+    .optional(),
 });
 
 const steps = [
@@ -47,7 +50,7 @@ export default function Home() {
             <PersonalInfoForm />
             <SelectPlanForm />
             <SelectAddons />
-            <>Hola Mundo</>
+            <FinishingUp />
           </Wizard>
         </FormProvider>
       </div>
