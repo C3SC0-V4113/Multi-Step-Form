@@ -17,21 +17,19 @@ export const PersonalInfoForm = () => {
   const { nextStep } = useWizard();
 
   const onSubmit = () => {
-    console.log(form.getValues());
-    // form.setValue("name", form.getValues().name);
     nextStep();
   };
 
   return (
     <div className="md:flex">
       <StepIndicator />
-      <div className="flex flex-col md:ml-3">
+      <div className="flex flex-col md:ml-3 md:h-[680px] md:w-[320px]">
         <h1 className="font-bold text-xl">Personal Information</h1>
         <p>Please provide your name, email address, and phone number.</p>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 mt-4"
+            className="flex flex-col gap-6 mt-4 h-full"
           >
             <FormField
               control={form.control}
@@ -85,7 +83,7 @@ export const PersonalInfoForm = () => {
                 </FormItem>
               )}
             />
-            <div className="bottom-0 right-0 left-0 fixed bg-primary w-full justify-end p-4 flex md:relative">
+            <div className="bottom-0 right-0 left-0 fixed bg-primary w-full justify-end p-4 flex md:relative md:mt-auto">
               <Button type="submit" variant={"secondary"}>
                 Next Step
               </Button>

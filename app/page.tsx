@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -24,11 +23,6 @@ const formSchema = z.object({
     .array(z.enum(["online-service", "larger-storage", "customizable-profile"]))
     .optional(),
 });
-
-const steps = [
-  { label: "Your Info", element: <PersonalInfoForm /> },
-  { label: "Select Plan", element: <h1>Select your Plan</h1> },
-];
 
 export default function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
