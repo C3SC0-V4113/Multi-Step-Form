@@ -7,7 +7,7 @@ export const StepIndicator = () => {
   const { activeStep } = useWizard();
 
   return (
-    <div className="flex fixed md:w-80 md:relative md:flex-col top-10 right-0 left-0 w-full justify-center md:justify-start md:top-0 md:p-8 gap-4">
+    <div className="flex fixed md:w-80 md:relative md:flex-col top-10 right-0 left-0 w-full justify-center md:justify-start md:top-0 md:p-8 gap-4 lg:py-12 lg:gap-6 xl:py-16">
       <Image
         className="hidden md:block"
         src="/images/bg-sidebar-desktop.svg"

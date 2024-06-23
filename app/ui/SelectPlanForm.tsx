@@ -30,6 +30,36 @@ export const SelectPlanForm = () => {
     setBillingYearly(form.getValues().billingYearly);
   }, [form]);
 
+  const items = [
+    {
+      label: "Arcade",
+      value: "arcade",
+      image: { src: "/icons/icon-arcade.svg", alt: "arcade icon" },
+      prices: {
+        yearly: 90,
+        monthly: 9,
+      },
+    },
+    {
+      label: "Advanced",
+      value: "advanced",
+      image: { src: "/icons/icon-advanced.svg", alt: "advanced icon" },
+      prices: {
+        yearly: 120,
+        monthly: 12,
+      },
+    },
+    {
+      label: "Pro",
+      value: "pro",
+      image: { src: "/icons/icon-pro.svg", alt: "pro icon" },
+      prices: {
+        yearly: 150,
+        monthly: 15,
+      },
+    },
+  ];
+
   return (
     <>
       <StepIndicator />
@@ -52,86 +82,45 @@ export const SelectPlanForm = () => {
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                       type="single"
-                      className="flex flex-col space-y-2"
+                      className="flex flex-col gap-2 lg:flex-row w-full"
                     >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <ToggleGroupItem
-                            className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4"
-                            value="arcade"
-                          >
-                            <Image
-                              src={"/icons/icon-arcade.svg"}
-                              alt={"arcade icon"}
-                              className="my-auto"
-                              width={40}
-                              height={40}
-                            />
-                            <div className="flex flex-col my-auto text-left">
-                              <p className="font-bold text-accent">Arcade</p>
-                              <p className="text-muted-foreground">{`$${
-                                billingYearly ? "90/yr" : "9/mo"
-                              }`}</p>
-                              {billingYearly && (
-                                <p className="text-accent">2 months free</p>
-                              )}
-                            </div>
-                          </ToggleGroupItem>
-                        </FormControl>
-                        <FormLabel className="sr-only">Arcade</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <ToggleGroupItem
-                            value="advanced"
-                            className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4"
-                          >
-                            <Image
-                              src={"/icons/icon-advanced.svg"}
-                              alt={"advanced icon"}
-                              className="my-auto"
-                              width={40}
-                              height={40}
-                            />
-                            <div className="flex flex-col my-auto text-left">
-                              <p className="font-bold">Advanced</p>
-                              <p className="text-muted-foreground">{`$${
-                                billingYearly ? "120/yr" : "12/mo"
-                              }`}</p>
-                              {billingYearly && (
-                                <p className="text-accent">2 months free</p>
-                              )}
-                            </div>
-                          </ToggleGroupItem>
-                        </FormControl>
-                        <FormLabel className="sr-only">Advanced</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <ToggleGroupItem
-                            value="pro"
-                            className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4"
-                          >
-                            <Image
-                              src={"/icons/icon-pro.svg"}
-                              alt={"pro icon"}
-                              className="my-auto"
-                              width={40}
-                              height={40}
-                            />
-                            <div className="flex flex-col my-auto text-left">
-                              <p className="font-bold">Pro</p>
-                              <p className="text-muted-foreground">{`$${
-                                billingYearly ? "150/yr" : "15/mo"
-                              }`}</p>
-                              {billingYearly && (
-                                <p className="text-accent">2 months free</p>
-                              )}
-                            </div>
-                          </ToggleGroupItem>
-                        </FormControl>
-                        <FormLabel className="sr-only">Pro</FormLabel>
-                      </FormItem>
+                      {items.map((item) => (
+                        <FormItem
+                          className="flex items-center basis-1/3"
+                          key={item.value}
+                        >
+                          <FormControl>
+                            <ToggleGroupItem
+                              className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4 lg:flex-col"
+                              value={item.value}
+                            >
+                              <Image
+                                src={item.image.src}
+                                alt={item.image.alt}
+                                className="my-auto"
+                                width={40}
+                                height={40}
+                              />
+                              <div className="flex flex-col my-auto text-left">
+                                <p className="font-bold text-accent">
+                                  {item.label}
+                                </p>
+                                <p className="text-muted-foreground">{`$${
+                                  billingYearly
+                                    ? `${item.prices.yearly}/yr`
+                                    : `${item.prices.monthly}/mo`
+                                }`}</p>
+                                {billingYearly && (
+                                  <p className="text-accent">2 months free</p>
+                                )}
+                              </div>
+                            </ToggleGroupItem>
+                          </FormControl>
+                          <FormLabel className="sr-only">
+                            {item.label}
+                          </FormLabel>
+                        </FormItem>
+                      ))}
                     </ToggleGroup>
                   </FormControl>
                   <FormMessage />
