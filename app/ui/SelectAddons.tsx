@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
-import { StepIndicator } from "./components/StepIndicator";
+import { FormWrapper, StepButtons, StepIndicator } from "./components";
 
 const items = [
   {
@@ -37,20 +36,21 @@ const items = [
   },
 ];
 
-const SelectAddons = () => {
+export const SelectAddons = () => {
   const form = useFormContext();
-  const { nextStep, previousStep } = useWizard();
+  const { nextStep } = useWizard();
 
   const onSubmit = () => {
     nextStep();
   };
 
   return (
-    <div className="md:flex">
+    <>
       <StepIndicator />
-      <div className="flex flex-col md:ml-3 md:h-[680px] md:w-[320px]">
-        <h1 className="font-bold text-xl">Pick add-ons</h1>
-        <p>Add-ons help enhance your gaming experience</p>
+      <FormWrapper
+        title="Pick add-ons"
+        description="Add-ons help enhance your gaming experience"
+      >
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -91,8 +91,8 @@ const SelectAddons = () => {
                               }}
                             />
                           </FormControl>
-                          <FormLabel className="font-normal flex w-full">
-                            <div className="flex flex-col basis-4/5  gap-2">
+                          <FormLabel className="font-normal flex w-full gap-1">
+                            <div className="flex flex-col basis-4/5 gap-2">
                               <p className="font-bold text-accent">
                                 {item.label}
                               </p>
@@ -112,23 +112,10 @@ const SelectAddons = () => {
                 </FormItem>
               )}
             />
-            <div className="fixed bottom-0 right-0 left-0 bg-primary w-full justify-between p-4 flex md:relative md:mt-auto">
-              <Button
-                onClick={previousStep}
-                variant={"link"}
-                className="text-muted"
-              >
-                Go Back
-              </Button>
-              <Button type="submit" variant={"secondary"}>
-                Next Step
-              </Button>
-            </div>
+            <StepButtons />
           </form>
         </Form>
-      </div>
-    </div>
+      </FormWrapper>
+    </>
   );
 };
-
-export default SelectAddons;

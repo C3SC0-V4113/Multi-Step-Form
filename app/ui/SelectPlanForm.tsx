@@ -1,7 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,11 +13,11 @@ import { Switch } from "@/components/ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
-import { StepIndicator } from "./components/StepIndicator";
+import { StepIndicator, StepButtons, FormWrapper } from "./components";
 
 export const SelectPlanForm = () => {
   const form = useFormContext();
-  const { nextStep, previousStep } = useWizard();
+  const { nextStep } = useWizard();
   const [billingYearly, setBillingYearly] = useState<boolean>(
     form.getValues().billingYearly
   );
@@ -32,12 +31,12 @@ export const SelectPlanForm = () => {
   }, [form]);
 
   return (
-    <div className="md:flex">
+    <>
       <StepIndicator />
-      <div className="flex flex-col md:ml-3 md:h-[680px] md:w-[320px]">
-        <h1 className="font-bold text-xl">Select your plan</h1>
-        <p>You have the option of monthly or yearly billing</p>
-
+      <FormWrapper
+        title="Select your plan"
+        description="You have the option of monthly or yearly billing"
+      >
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -169,22 +168,10 @@ export const SelectPlanForm = () => {
                 </FormItem>
               )}
             />
-            <div className="fixed bottom-0 right-0 left-0 bg-primary w-full justify-between p-4 flex md:relative md:mt-auto">
-              <Button
-                onClick={previousStep}
-                variant={"link"}
-                className="text-muted"
-                disabled={form.formState.errors.plan ? true : false}
-              >
-                Go Back
-              </Button>
-              <Button type="submit" variant={"secondary"}>
-                Next Step
-              </Button>
-            </div>
+            <StepButtons />
           </form>
         </Form>
-      </div>
-    </div>
+      </FormWrapper>
+    </>
   );
 };

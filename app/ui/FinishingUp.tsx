@@ -4,7 +4,7 @@ import { Separator } from "@radix-ui/react-separator";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 import { z } from "zod";
-import { StepIndicator } from "./components/StepIndicator";
+import { FormWrapper, StepButtons, StepIndicator } from "./components";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -22,7 +22,7 @@ const formSchema = z.object({
 
 export const FinishingUp = () => {
   const form = useFormContext<z.infer<typeof formSchema>>();
-  const { nextStep, previousStep, goToStep } = useWizard();
+  const { goToStep } = useWizard();
 
   const { billingYearly, plan, addons } = form.getValues();
 
@@ -33,11 +33,12 @@ export const FinishingUp = () => {
   );
 
   return (
-    <div className="md:flex">
+    <>
       <StepIndicator />
-      <div className="flex flex-col md:ml-3 md:h-[680px] md:w-[320px]">
-        <h1 className="font-bold text-xl">Finishing Up</h1>
-        <p>Double-check everything looks OK before confirming</p>
+      <FormWrapper
+        title="Finishing Up"
+        description="Double-check everything looks OK before confirming"
+      >
         <div className="p-4 my-4 w-full flex flex-col bg-background text-foreground rounded">
           <div className="flex w-full">
             <div className="flex flex-col basis-4/5 text-left">
@@ -78,19 +79,8 @@ export const FinishingUp = () => {
           }`}</p>
           <p className="font-bold text-accent">{fullPrice}</p>
         </div>
-        <div className="fixed bottom-0 right-0 left-0 bg-primary w-full justify-between p-4 flex md:relative md:mt-auto">
-          <Button
-            onClick={previousStep}
-            variant={"link"}
-            className="text-muted"
-          >
-            Go Back
-          </Button>
-          <Button onClick={() => nextStep()} variant={"secondary"}>
-            Confirm
-          </Button>
-        </div>
-      </div>
-    </div>
+        <StepButtons />
+      </FormWrapper>
+    </>
   );
 };

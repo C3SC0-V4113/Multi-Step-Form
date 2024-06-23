@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,7 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
-import { StepIndicator } from "./components/StepIndicator";
+import { StepIndicator, StepButtons, FormWrapper } from "./components";
 
 export const PersonalInfoForm = () => {
   const form = useFormContext();
@@ -21,11 +20,14 @@ export const PersonalInfoForm = () => {
   };
 
   return (
-    <div className="md:flex">
+    <>
       <StepIndicator />
-      <div className="flex flex-col md:ml-3 md:h-[680px] md:w-[320px]">
-        <h1 className="font-bold text-xl">Personal Information</h1>
-        <p>Please provide your name, email address, and phone number.</p>
+      <FormWrapper
+        title="Personal Information"
+        description={
+          "Please provide your name, email address, and phone number."
+        }
+      >
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -83,14 +85,10 @@ export const PersonalInfoForm = () => {
                 </FormItem>
               )}
             />
-            <div className="bottom-0 right-0 left-0 fixed bg-primary w-full justify-end p-4 flex md:relative md:mt-auto">
-              <Button type="submit" variant={"secondary"}>
-                Next Step
-              </Button>
-            </div>
+            <StepButtons />
           </form>
         </Form>
-      </div>
-    </div>
+      </FormWrapper>
+    </>
   );
 };
