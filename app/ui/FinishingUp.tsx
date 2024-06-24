@@ -42,16 +42,16 @@ export const FinishingUp = () => {
         <div className="p-4 my-4 w-full flex flex-col bg-background text-foreground rounded">
           <div className="flex w-full">
             <div className="flex flex-col basis-4/5 text-left">
-              <p className="font-bold text-accent-foreground">{planFull}</p>
+              <p className="font-bold text-accent">{planFull}</p>
               <Button
                 variant={"link"}
-                className="w-auto h-auto p-0 justify-start"
+                className="w-auto h-auto p-0 justify-start text-muted-foreground"
                 onClick={() => goToStep(1)}
               >
                 Change
               </Button>
             </div>
-            <p className="flex basis-1/5 my-auto text-center font-bold text-accent-foreground">
+            <p className="flex basis-1/5 my-auto text-center font-bold text-accent">
               {planPrice}
             </p>
           </div>
@@ -63,7 +63,7 @@ export const FinishingUp = () => {
                   <p className="flex basis-4/5 text-left text-muted-foreground">
                     {addonInfo.cleanName}
                   </p>
-                  <p className="flex basis-1/5 text-center text-accent-foreground">
+                  <p className="flex basis-1/5 text-center text-accent">
                     {addonInfo.price}
                   </p>
                 </div>
@@ -77,7 +77,7 @@ export const FinishingUp = () => {
           <p className="basis-4/5 text-left">{`Total ${
             billingYearly ? "(Yearly)" : "(Monthly)"
           }`}</p>
-          <p className="font-bold text-accent">{fullPrice}</p>
+          <p className="font-bold text-border">{fullPrice}</p>
         </div>
         <StepButtons />
       </FormWrapper>

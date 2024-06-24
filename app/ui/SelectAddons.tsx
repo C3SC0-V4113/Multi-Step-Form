@@ -70,9 +70,9 @@ export const SelectAddons = () => {
                         <FormItem
                           key={item.id}
                           className={clsx(
-                            "flex flex-row items-start space-x-3 border p-4 rounded space-y-0",
+                            "flex flex-row items-start space-x-3 cursor-pointer border-muted border p-4 rounded space-y-0",
                             {
-                              "border-accent":
+                              "border-border bg-muted":
                                 field.value?.includes(item.id) === true,
                             }
                           )}
@@ -91,14 +91,14 @@ export const SelectAddons = () => {
                               }}
                             />
                           </FormControl>
-                          <FormLabel className="font-normal flex w-full gap-1">
+                          <FormLabel className="font-normal cursor-pointer flex w-full gap-1">
                             <div className="flex flex-col basis-4/5 gap-2">
                               <p className="font-bold text-accent">
                                 {item.label}
                               </p>
                               <p>{item.description}</p>
                             </div>
-                            <p className="basis-1/5 self-center text-center">{`+$${
+                            <p className="basis-1/5 self-center text-center text-border">{`+$${
                               form.getValues().billingYearly === false
                                 ? item.monthlyPrice + "/mo"
                                 : item.yearlyPrice + "/yr"

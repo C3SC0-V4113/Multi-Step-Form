@@ -91,7 +91,7 @@ export const SelectPlanForm = () => {
                         >
                           <FormControl>
                             <ToggleGroupItem
-                              className="p-4 w-full border border-muted-foreground rounded data-[state=on]:border-secondary flex gap-4 lg:flex-col"
+                              className="p-4 w-full border border-muted rounded data-[state=on]:bg-muted data-[state=on]:border-border flex gap-4 lg:flex-col"
                               value={item.value}
                             >
                               <Image
@@ -135,7 +135,7 @@ export const SelectPlanForm = () => {
                   <FormLabel
                     className={clsx("text-base", {
                       "text-muted-foreground": billingYearly,
-                      "text-accent-foreground": !billingYearly,
+                      "text-accent": !billingYearly,
                     })}
                   >
                     Monthly
@@ -149,7 +149,7 @@ export const SelectPlanForm = () => {
                   <FormLabel
                     className={clsx("text-base", {
                       "text-muted-foreground": !billingYearly,
-                      "text-accent-foreground": billingYearly,
+                      "text-accent": billingYearly,
                     })}
                   >
                     Yearly

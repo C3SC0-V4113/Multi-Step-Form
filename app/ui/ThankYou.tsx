@@ -13,7 +13,9 @@ export const ThankYou = () => {
             width={60}
             height={60}
           />
-          <h1 className="font-bold text-2xl">Thank you!</h1>
+          <h1 className="font-bold text-2xl text-primary-foreground">
+            Thank you!
+          </h1>
           <p className="text-center">
             Thanks for confirming your subscription! We hope you have fun using
             our platform. If you ever need support, please feel free to email us

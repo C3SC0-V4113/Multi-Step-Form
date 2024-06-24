@@ -22,7 +22,7 @@ export const StepButtons = () => {
         onClick={previousStep}
         disabled={form.formState.errors.plan ? true : false}
         variant={"link"}
-        className="text-muted"
+        className="text-muted-foreground"
       >
         Go Back
       </Button>

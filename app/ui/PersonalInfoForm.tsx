@@ -38,7 +38,7 @@ export const PersonalInfoForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel className="text-accent">Name</FormLabel>
                   <FormControl>
                     <Input
                       className="text-secondary-foreground"
@@ -55,7 +55,7 @@ export const PersonalInfoForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel className="text-accent">Email Address</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
@@ -73,7 +73,7 @@ export const PersonalInfoForm = () => {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel className="text-accent">Phone Number</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="e.g. +1 234 567 890"
