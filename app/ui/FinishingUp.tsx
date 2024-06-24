@@ -4,7 +4,12 @@ import { Separator } from "@radix-ui/react-separator";
 import { useFormContext } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 import { z } from "zod";
-import { FormWrapper, StepButtons, StepIndicator } from "./components";
+import {
+  AnimatedDiv,
+  FormWrapper,
+  StepButtons,
+  StepIndicator,
+} from "./components";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -39,46 +44,48 @@ export const FinishingUp = () => {
         title="Finishing Up"
         description="Double-check everything looks OK before confirming"
       >
-        <div className="p-4 my-4 w-full flex flex-col bg-background text-foreground rounded">
-          <div className="flex w-full">
-            <div className="flex flex-col basis-4/5 text-left">
-              <p className="font-bold text-accent">{planFull}</p>
-              <Button
-                variant={"link"}
-                className="w-auto h-auto p-0 justify-start text-muted-foreground"
-                onClick={() => goToStep(1)}
-              >
-                Change
-              </Button>
+        <AnimatedDiv>
+          <div className="p-4 mt-4 w-full flex flex-col bg-background text-foreground rounded">
+            <div className="flex w-full">
+              <div className="flex flex-col basis-4/5 text-left">
+                <p className="font-bold text-accent">{planFull}</p>
+                <Button
+                  variant={"link"}
+                  className="w-auto h-auto p-0 justify-start text-muted-foreground"
+                  onClick={() => goToStep(1)}
+                >
+                  Change
+                </Button>
+              </div>
+              <p className="flex basis-1/5 my-auto text-center font-bold text-accent">
+                {planPrice}
+              </p>
             </div>
-            <p className="flex basis-1/5 my-auto text-center font-bold text-accent">
-              {planPrice}
-            </p>
+            {addonsArray.length ? (
+              <>
+                <Separator className="my-2 border-muted border" />
+                {addonsArray.map((addonInfo, index) => (
+                  <div className="flex w-full my-2" key={index}>
+                    <p className="flex basis-4/5 text-left text-muted-foreground">
+                      {addonInfo.cleanName}
+                    </p>
+                    <p className="flex basis-1/5 text-center text-accent">
+                      {addonInfo.price}
+                    </p>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <></>
+            )}
           </div>
-          {addonsArray.length ? (
-            <>
-              <Separator className="my-2 border-muted border" />
-              {addonsArray.map((addonInfo, index) => (
-                <div className="flex w-full my-2" key={index}>
-                  <p className="flex basis-4/5 text-left text-muted-foreground">
-                    {addonInfo.cleanName}
-                  </p>
-                  <p className="flex basis-1/5 text-center text-accent">
-                    {addonInfo.price}
-                  </p>
-                </div>
-              ))}
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
-        <div className="px-4 my-4 w-full flex rounded">
-          <p className="basis-4/5 text-left">{`Total ${
-            billingYearly ? "(Yearly)" : "(Monthly)"
-          }`}</p>
-          <p className="font-bold text-border">{fullPrice}</p>
-        </div>
+          <div className="px-4 w-full mb-4 flex rounded">
+            <p className="basis-4/5 text-left">{`Total ${
+              billingYearly ? "(Yearly)" : "(Monthly)"
+            }`}</p>
+            <p className="font-bold text-border">{fullPrice}</p>
+          </div>
+        </AnimatedDiv>
         <StepButtons />
       </FormWrapper>
     </>

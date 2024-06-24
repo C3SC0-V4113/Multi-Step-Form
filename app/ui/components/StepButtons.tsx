@@ -17,7 +17,7 @@ export const StepButtons = () => {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 left-0 bg-primary w-full justify-between p-4 flex md:relative md:mt-auto">
+    <div className="fixed bottom-0 right-0 left-0 bg-primary w-full justify-between p-4 flex md:relative md:mt-auto z-50">
       <Button
         onClick={previousStep}
         disabled={form.formState.errors.plan ? true : false}
