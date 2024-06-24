@@ -10,11 +10,14 @@ import {
   SelectPlanForm,
   ThankYou,
 } from "./ui";
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   email: z.string().email(),
-  phone: z.string().min(6),
+  phone: z
+    .string()
+    .refine(isValidPhoneNumber, { message: "Invalid phone number" }),
   billingYearly: z.boolean(),
   plan: z.enum(["arcade", "advanced", "pro"], {
     errorMap: () => ({ message: "You need to select a plan type." }),

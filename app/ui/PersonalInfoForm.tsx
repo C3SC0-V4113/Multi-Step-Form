@@ -15,6 +15,7 @@ import {
   FormWrapper,
   AnimatedDiv,
 } from "./components";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 export const PersonalInfoForm = () => {
   const form = useFormContext();
@@ -81,7 +82,7 @@ export const PersonalInfoForm = () => {
                   <FormItem>
                     <FormLabel className="text-accent">Phone Number</FormLabel>
                     <FormControl>
-                      <Input
+                      <PhoneInput
                         placeholder="e.g. +1 234 567 890"
                         className="text-secondary-foreground"
                         {...field}
